@@ -1,0 +1,4 @@
+0.dat :
+widthSprite heightSprite
+1.dat :
+hp att gold speed animTime
