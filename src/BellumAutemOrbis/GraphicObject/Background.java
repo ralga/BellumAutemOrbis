@@ -1,14 +1,15 @@
 package BellumAutemOrbis.GraphicObject;
 
 import BellumAutemOrbis.BellumAutemOrbis;
-import java.util.ArrayList;
 
-public class Entity extends GraphicObject {
+public class Background extends GraphicObject {
 
-    private final ArrayList tabGO = new ArrayList();
+    private static final String IMGPATH = "res/img/background/";
+    private final int img;
 
-    public Entity(BellumAutemOrbis bao, int x, int y, int w, int h) {
-        super(bao, x, y, w, h);
+    public Background(BellumAutemOrbis bao, int img) {
+        super(bao, 0, 0, bao.W, bao.H, IMGPATH);
+        this.img = img;
     }
 
     @Override
@@ -17,7 +18,7 @@ public class Entity extends GraphicObject {
 
     @Override
     public void draw() {
-
+        image(tabImg[img], 0, 0);
     }
 
     @Override
@@ -27,5 +28,4 @@ public class Entity extends GraphicObject {
     @Override
     public void mouseMoved(int x, int y) {
     }
-
 }
