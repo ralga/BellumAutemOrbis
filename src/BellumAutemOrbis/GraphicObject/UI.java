@@ -40,17 +40,18 @@ public class UI extends GraphicObject {
                 Unit u = (Unit) GameObject.selec;
                 text("Attaque : " + u.att, bao.W / 2 - 20, 130);
                 image(tabImg[Unit.selec.type + 2], 150, 40);
+                if (u.type == 2)
+                    image(tabButton[3], 2 * bao.W / 3 + 20, 35);
             }
             else {
                 Building b = (Building) GameObject.selec;
                 int i;
                 if (b.team)
-                    i = 2;
-                else
                     i = 1;
-                image(b.tabImg[b.type * i], 150, 40);
-                image(tabButton[b.typeGO * i + 7], 2 * bao.W / 3 + 20, 35);
-
+                else
+                    i = 0;
+                image(b.tabImg[b.type], 150, 40);
+                image(tabButton[b.typeGO + 7], 2 * bao.W / 3 + 20, 35);
             }
         }
     }
@@ -60,12 +61,22 @@ public class UI extends GraphicObject {
         if (GameObject.selec != null)
             if (GameObject.selec.cw != 1) {
                 Building b = (Building) GameObject.selec;
-                if ((x >= 2 * bao.W / 3) && (x < 2 * bao.W / 3 + 50) && (y >= 35 + this.y) && (y < 85 + this.y))
+                if ((x >= 2 * bao.W / 3) && (x < 2 * bao.W / 3 + 50) && (y >= 15 + this.y) && (y < 85 + this.y))
                     if (bao.getTeam().gold >= 100) {
                         bao.getTeam().gold -= 100;
-                        Unit.units.add(new Unit(bao, 0, b.cx + 1, b.cy, false));
+                        synchronized (Unit.units) {
+                            Unit.units.add(new Unit(bao, b.typeGO+1, b.cx + 1, b.cy, false));
+                        }
                     }
                 ++x;
+            }
+            else {
+                Unit u = (Unit) GameObject.selec;
+                if ((x >= 2 * bao.W / 3) && (x < 2 * bao.W / 3 + 50) && (y >= 35 + this.y) && (y < 85 + this.y))
+                if (bao.getTeam().wood >= 100) {
+                    bao.getTeam().wood -= 100;
+                    Building.buildings.add(new Building(bao, 3, u.cx+ 1,u.cy, false));
+                }
             }
 
     }
