@@ -1,12 +1,10 @@
 package BellumAutemOrbis.GraphicObject;
 
 import BellumAutemOrbis.BellumAutemOrbis;
-import BellumAutemOrbis.DynamicEvent;
-import BellumAutemOrbis.View.Game;
 import processing.core.PApplet;
 
-public class Button extends GraphicObject {
-
+public class Button extends GraphicObject
+{
     private static final String IMGPATH = "res/img/button/";
 
     private final int ID;
@@ -17,13 +15,15 @@ public class Button extends GraphicObject {
     private int img;
     private int opacity = OPA1;
 
-    public Button(BellumAutemOrbis bao, Text t, int id) {
+    public Button(BellumAutemOrbis bao, Text t, int id)
+    {
         super(bao, (int) (t.getX()) - (bao.width - bao.W) / 2, (int) (t.getY()) - (bao.height - bao.H) / 2 - t.h / 7, t.getW(), t.getH());
         this.t = t;
         this.ID = id;
     }
 
-    public Button(BellumAutemOrbis bao, int x, int y, int img1, int img2, int id) {
+    public Button(BellumAutemOrbis bao, int x, int y, int img1, int img2, int id)
+    {
         super(bao, x, y, 0, 0, IMGPATH);
         this.IMG1 = this.img = img1;
         this.IMG2 = img2;
@@ -32,7 +32,8 @@ public class Button extends GraphicObject {
         this.ID = id;
     }
 
-    public Button(BellumAutemOrbis bao, int x, int y, int w, int h, int id, int op) {
+    public Button(BellumAutemOrbis bao, int x, int y, int w, int h, int id, int op)
+    {
         super(bao, x, y, w, h);
         this.ID = id;
         OPA1 = op;
@@ -40,31 +41,35 @@ public class Button extends GraphicObject {
 
     private void changeState(boolean state) //state : false : bouton inactif, true : bouton actif
     {
-        if (t != null)
-            if (state)
+        if(t != null)
+            if(state)
                 opacity = OPA2;
             else
                 opacity = OPA1;
-        else if (state)
+        else if(state)
             img = IMG2;
         else
             img = IMG1;
     }
 
     @Override
-    public void init() {
+    public void init()
+    {
     }
 
     @Override
-    public void draw() {
+    public void draw()
+    {
         bao.g.imageMode(PApplet.CORNER);
         bao.g.rectMode(PApplet.CORNER);
-        if (t != null) {
+        if(t != null)
+        {
             bao.fill(255, opacity);
             rect(0, 0, w, h, 80);
             t.draw();
         }
-        else {
+        else
+        {
             bao.tint(255, 200);
             image(tabImg[img], 0, 0);
             bao.noTint();
@@ -72,31 +77,31 @@ public class Button extends GraphicObject {
     }
 
     @Override
-    public void mousePressed(int x, int y) {
+    public void mousePressed(int x, int y, int type)
+    {
         changeState(false);
-        switch (ID) {
+        switch(ID)
+        {
             case 0:                                                             //Actions lors d'un clic de souris sur le bouton jouer
-                if (isOn(x, y)){
+                if(isOn(x, y))
                     bao.setView(2);
-                    bao.initGame();
-                }
                 break;
             case 1:                                                             //Actions lors d'un clic de souris sur le bouton quitter
-                if (isOn(x, y))
+                if(isOn(x, y))
                     BellumAutemOrbis.bao.exit();
                 break;
-            case 2:
-                if (isOn(x, y)){
-                    bao.tStart();
+            case 2:                                                             //Actions lors d'un clic de souris sur le bouton annuler
+                if(isOn(x, y))
+                {
                     bao.setView(1);
-                    
-                }																//Actions lors d'un clic de souris sur le bouton annuler
+                    bao.startGame(false);
+                }
                 break;
             case 3:                                                             //Actions lors d'un clic de souris sur le bouton en ligne : normale
-                if (isOn(x, y)){
-                    bao.tStart();
+                if(isOn(x, y))
+                {
                     bao.setView(1);
-                    
+                    bao.startGame(true);
                 }
                 break;
             case 4:                                                             //Actions lors d'un clic de souris sur le bouton en ligne : classique
@@ -109,12 +114,8 @@ public class Button extends GraphicObject {
     }
 
     @Override
-    public void mouseMoved(int x, int y) {
+    public void mouseMoved(int x, int y)
+    {
         changeState(isOn(x, y));
-
-        /*if(se.getViews()[0].getGO()[2].isOn(x, y) || se.getViews()[0].getGO()[4].isOn(x, y))
-         se.getSurface().setCursor(12);                                      //Modification de l'apparence du curseur de la souris lorsque l'on est au-dessus d'un bouton
-         else
-         se.getSurface().setCursor(0);*/
     }
 }

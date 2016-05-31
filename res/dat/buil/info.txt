@@ -1,4 +1,4 @@
 0.dat :
 widthSprite heightSprite
 1.dat :
-hp gold costGold costWood evol unit1 unit2...
+hp gold costGold costWood unit

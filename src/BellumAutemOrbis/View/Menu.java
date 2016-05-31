@@ -3,9 +3,10 @@ package BellumAutemOrbis.View;
 import BellumAutemOrbis.BellumAutemOrbis;
 import BellumAutemOrbis.GraphicObject.*;
 
-public class Menu extends View {
-
-    public Menu() {
+public class Menu extends View
+{
+    public Menu()
+    {
         BellumAutemOrbis bao = BellumAutemOrbis.bao;
         tabGrO.add(new Background(bao, 0));
         tabGrO.add(new Text(bao, bao.W / 2 - 300, bao.H / 2 - 350, 600, 350, 75, "Bellum Autem Orbis", "Dragon_Caps.ttf", 255));

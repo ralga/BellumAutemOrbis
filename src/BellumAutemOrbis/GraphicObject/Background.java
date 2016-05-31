@@ -22,7 +22,7 @@ public class Background extends GraphicObject {
     }
 
     @Override
-    public void mousePressed(int x, int y) {
+    public void mousePressed(int x, int y, int type) {
     }
 
     @Override
