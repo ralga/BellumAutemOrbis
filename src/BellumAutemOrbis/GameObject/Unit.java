@@ -34,7 +34,7 @@ public class Unit extends GameObject {
 //        int[] p2 = {5, 5};int[] p3 = {6, 5};int[] p4 = {7, 5};int[] p5 = {7,4};
 //        int[] p6 = {6,4};int[] p7 = {6,4};int[] p8 = {5,4};int[] p9 = {4,4};
         Astar astar = new Astar();
-        path = astar.astar(World.colli, new Elements(0,0,4,4,null), new Elements(0,0,20,20,null));
+        path = astar.astar(World.colli, new Elements(0,0,cx,cy,null), new Elements(0,0,30,42,null));
         if(!path.isEmpty())
             getDirection();
         units.add(this);

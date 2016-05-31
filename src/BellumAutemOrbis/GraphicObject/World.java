@@ -7,7 +7,7 @@ import processing.core.PGraphics;
 public class World extends GraphicObject {
 
     public static World world;
-    public static boolean[][] colli = new boolean[50][50];
+    public static boolean[][] colli;
     private static final String IMGPATH = "res/img/world/";
     private static final String DATPATH = "res/dat/world/";
     public static final int C = 40;
@@ -46,11 +46,10 @@ public class World extends GraphicObject {
 
     @Override
     public void mousePressed(int x, int y) {
-        if (!isOn(x, y) || y > (bao.height - bao.H) / 2 + 3 * bao.H / 4)
-            return;
-        int cx = (posX + x - (bao.width - bao.W) / 2) / C;
-        int cy = (posY + y - (bao.height - bao.H) / 2) / C;
-        System.out.println(cx + "; " + cy);
+        if(!isOn(x, y) || y > (bao.height-bao.H)/2+3*bao.H/4)return;
+        int cx = (posX+x-(bao.width-bao.W)/2) / C;
+        int cy = (posY+y-(bao.height-bao.H)/2) / C;
+        System.out.println(cx + "; " + cy + " : " + colli[cy][cx]);
         for (Unit u : Unit.units)
             if (!u.team && u.cx == cx && u.cy == cy) {
                 Unit.selec = u;
@@ -79,6 +78,7 @@ public class World extends GraphicObject {
     
     public static void initCollision()
     {
+        colli = new boolean[50][50];
         for(int i = 0; i < colli.length; i++)
             for(int j = 0; j < colli[i].length; j++)
                 if(world.tabDat[1][0][world.tabDat[0][i][j]] == 1)

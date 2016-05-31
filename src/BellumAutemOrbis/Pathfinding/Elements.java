@@ -8,13 +8,13 @@ public class Elements/*<T>*/ {
     private int heuristique;
     private Elements pred;
 
-    public Elements(/*T elt, */int prio, int heuristique, int x, int y,Elements q) {
+    public Elements(/*T elt, */int prio, int heuristique, int x, int y, Elements q) {
 //        this.elt = elt;
         this.prio = prio;
         this.x = x;
         this.y = y;
         this.heuristique = heuristique;
-        this.pred=q;
+        this.pred = q;
     }
 
     //Getters 
@@ -31,24 +31,33 @@ public class Elements/*<T>*/ {
         return x;
     }
 
-    public Elements getPred(){
+    public Elements getPred() {
         return this.pred;
     }
-    
+
     public int getY() {
         return y;
     }
 
+    public boolean moinsPriotaireQue(Elements e) {
+        return this.prio>=e.getCout();
+    }
+
+    public boolean plusPrioritaireQue(Elements e) {
+        return this.prio<=e.getCout();
+    }
+    
     //Setters
     public void setCout(int prio) {
         this.prio = prio;
     }
 
-    public void setPred(Elements n){
-        this.pred=n;
+    public void setPred(Elements n) {
+        this.pred = n;
     }
-    
+
     public void setHeuristique(int heur) {
         this.heuristique = heur;
     }
+
 }

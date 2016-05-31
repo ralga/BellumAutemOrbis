@@ -16,14 +16,25 @@ public final class PriorityQueue {
     }
 
     public void add(Elements n) {
-        int pos = searchPos(n.getHeuristique());
+        /*int pos = searchPos(n.getHeuristique());
         if (pos != -1)
             list.add(pos, n);
         else
-            list.add(n);
-
+            list.add(n);*/
+        list.add(n);
+        int pos = list.size()-1;
+        while(pos > 0 && list.get(pos/2).getHeuristique()>n.getHeuristique()){
+            swap(pos,pos/2);
+            pos/=2;
+        }            
     }
 
+    private void swap(int n, int j){
+        Elements aux = list.get(n);
+        list.set(n, list.get(j));
+        list.set(j, aux);
+    }
+    
     /**
      * return the head WITHOUT deleting it
      *
